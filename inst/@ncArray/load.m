@@ -16,7 +16,6 @@ for i = 1:length(c)
   c(i).v = full(c(i).val);  
   % per default take all data along a dimension
   c(i).index = ':';
-  c(i).sub = c(i).v;
 
   % convert time units
   if ~isempty(strfind(c(i).units,'since'))     
@@ -24,6 +23,12 @@ for i = 1:length(c)
     c(i).v = f*double(c(i).v) + t0;
   end
 
+  % change vertical axis to positive up
+  if strcmp(c(i).positive,'down')
+    c(i).v = -double(c(i).v);
+  end
+
+  c(i).sub = c(i).v;
 end
 
 % loop over all constraints
