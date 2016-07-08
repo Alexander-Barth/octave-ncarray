@@ -35,7 +35,8 @@ vinfo = finfo.Variables(index);
 dims = {vinfo.Dimensions(:).Name};
 
 % create empty coord array with the fields name and dims
-coord = struct('name',{},'dims',{},'standard_name',{},'units',{});
+coord = struct('name',{},'dims',{},'standard_name',{},...
+               'units',{},'positive',{});
 
 % check the coordinate attribute
 if ~isempty(vinfo.Attributes)
@@ -76,6 +77,7 @@ if isempty(find(strcmp(name,{coord(:).name}),1))
         c.dims = {d(:).Name};
         c.standard_name = [];
         c.units = [];
+        c.positive = [];
         
         % get standard_name attribute if present
         i = find(strcmp('standard_name',{vinfo.Attributes(:).Name}));
@@ -89,6 +91,12 @@ if isempty(find(strcmp(name,{coord(:).name}),1))
           c.units = vinfo.Attributes(i).Value;
         end
         
+        % get positive attribute if present
+        i = find(strcmp('positive',{vinfo.Attributes(:).Name}));
+        if ~isempty(i)
+          c.positive = vinfo.Attributes(i).Value;
+        end
+
         coord(end+1) = c;
     end
 end
@@ -96,7 +104,7 @@ end
 end
 
 
-% Copyright (C) 2012, 2013 Alexander Barth <barth.alexander@gmail.com>
+% Copyright (C) 2012, 2013, 2015 Alexander Barth <barth.alexander@gmail.com>
 %
 % This program is free software; you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
