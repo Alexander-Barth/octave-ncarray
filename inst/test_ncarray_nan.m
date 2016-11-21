@@ -24,11 +24,11 @@ end
 data = ncCatArray(3,files,varname);
 reddata = nanmean(data,3);
 reddataref = nanmean(dataref,3);
-assert(isequaln(reddata, reddataref))
+assertAlmostEqual(reddata, reddataref)
 
 reddata = nansum(data,3);
 reddataref = nansum(dataref,3);
-assert(isequaln(reddata, reddataref))
+assertAlmostEqual(reddata, reddataref)
 
 reddata = nanvar(data,[],3);
 reddataref = nanvar(dataref,[],3);

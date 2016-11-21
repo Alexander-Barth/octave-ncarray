@@ -32,7 +32,7 @@ end
 function x = funelem(x,nm)
   % make sure x is not an ncArray
   x = full(x);
-  mask = isnan(x) || isnan(nm);
+  mask = isnan(x) | isnan(nm);
   diff = zeros(size(x));
   diff(mask) = x(mask) - nm(mask);
   x = {diff.^2, ~mask};  
