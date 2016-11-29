@@ -19,23 +19,6 @@ end
 filename = files{1};
 
 
-%%% test DerivedArray
-
-% reading convertion with 1 argument
-
-SST = ncArray(files{1},varname);
-Temp_in_K = DerivedArray(@(t) t + 273.15,{SST});
-ref = refdata{1} + 273.15;
-assertAlmostEqual(Temp_in_K(:,:,:),ref)
-
-% reading convertion with 2 arguments
-
-SST1 = ncArray(files{1},varname);
-SST2 = ncArray(files{2},varname);
-temp_trend = DerivedArray(@(t1,t2) t2 - t1,{SST1,SST2});
-ref = refdata{2} - refdata{1};
-assertAlmostEqual(temp_trend(:,:,:),ref)
-
 
 % test ncread/ncwrite
 
