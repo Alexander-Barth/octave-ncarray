@@ -57,6 +57,9 @@ end
 fname = url;
 fname = strrep(fname,'/','_SLASH_');
 fname = strrep(fname,'*','_STAR_');
+fname = strrep(fname,'\','_BSLASH_');
+fname = strrep(fname,':','_COLON_');
+
 fname = fullfile(cache_dir,fname);
 
 % test if in cache
