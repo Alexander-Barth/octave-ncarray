@@ -62,7 +62,13 @@ else
       try
         t0 = datenum(reference_date,'yyyy-mm-dd');
       catch
-        error(['date format is not recogized ' reference_date])
+        try
+          r = strrep(reference_date,'GMT','');
+          t0 = datenum(r,'yyyy-mm-dd HH:MM:SS');
+          
+        catch
+          error(['date format is not recogized ' reference_date])
+        end
       end
     end
   end
